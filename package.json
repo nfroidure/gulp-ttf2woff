@@ -40,7 +40,7 @@
     "gulp",
     "gulp-plugin",
     "font",
-    "eot",
+    "woff",
     "ttf",
     "converter"
   ],
