@@ -1,0 +1,52 @@
+{
+  "name": "gulp-ttf2woff",
+  "description": "Create a WOFF font from a TTF font",
+  "version": "0.0.1",
+  "homepage": "https://github.com/nfroidure/gulp-ttf2woff",
+  "author": {
+    "name": "Nicolas Froidure",
+    "url": "http://www.insertafter.com/blog.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nfroidure/gulp-ttf2woff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nfroidure/gulp-ttf2woff/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/nfroidure/gulp-ttf2woff/blob/master/LICENSE"
+    }
+  ],
+  "main": "src/index.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "mocha tests/*.mocha.js"
+  },
+  "dependencies": {
+    "ttf2woff": "latest",
+    "gulp-util": "~2.2.5",
+    "bufferstreams": "0.0.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "gulp-plugin",
+    "font",
+    "eot",
+    "ttf",
+    "converter"
+  ],
+  "devDependencies": {
+    "gulp": "~3.2.2",
+    "mocha": "~1.16.2",
+    "event-stream": "~3.0.20"
+  }
+}
