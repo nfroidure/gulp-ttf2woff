@@ -1,4 +1,4 @@
-var es = require('event-stream')
+var PassThrough = require('stream').PassThrough
   , gutil = require('gulp-util')
   , BufferStreams = require('bufferstreams')
   , ttf2woff = require('ttf2woff')
@@ -28,7 +28,11 @@ function ttf2woffTransform(opt) {
 // Plugin function
 function ttf2woffGulp() {
 
-  return es.map(function (file, callback) {
+  var stream = new PassThrough({objectMode: true});
+
+  stream.on('data', function(file) {
+    if(file.isNull()) return;
+
     file.path = gutil.replaceExtension(file.path, ".woff");
 
     // Buffers
@@ -37,17 +41,20 @@ function ttf2woffGulp() {
         file.contents = new Buffer(ttf2woff(
           new Uint8Array(file.contents)
         ).buffer);
-        callback(null, file);
       } catch(err) {
-        callback(new gutil.PluginError('ttf2woff', err, {showStack: true}));
+        stream.emit('error', new gutil.PluginError('ttf2woff', err, {
+          showStack: true
+        }));
       }
 
     // Streams
     } else {
       file.contents = file.contents.pipe(new BufferStreams(ttf2woffTransform()));
-      callback(null, file);
     }
+
   });
+
+  return stream;
 
 };
 
