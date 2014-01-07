@@ -27,10 +27,11 @@ describe('gulp-ttf2woff conversion', function() {
         .pipe(ttf2woff())
         // Uncomment to regenerate the test files if changes in the ttf2woff lib
         // .pipe(gulp.dest(__dirname + '/fixtures/'))
-        .pipe(es.map(function(file) {
+        .pipe(es.through(function(file) {
           assert.equal(file.contents.length, woff.length);
           assert.equal(file.contents.toString('utf-8'), woff.toString('utf-8'));
-          done();
+        }, function() {
+            done();
         }));
 
   });
@@ -39,13 +40,14 @@ describe('gulp-ttf2woff conversion', function() {
 
       gulp.src(filename + '.ttf', {buffer: false})
         .pipe(ttf2woff())
-        .pipe(es.map(function(file) {
+        .pipe(es.through(function(file) {
           // Get the buffer to compare results
           file.contents.pipe(es.wait(function(err, data) {
             assert.equal(data.length, woff.toString('utf-8').length);
             assert.equal(data, woff.toString('utf-8'));
-            done();
           }));
+        }, function() {
+            done();
         }));
 
   });
