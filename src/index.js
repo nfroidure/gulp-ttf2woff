@@ -4,6 +4,8 @@ var PassThrough = require('stream').PassThrough
   , ttf2woff = require('ttf2woff')
 ;
 
+const PLUGIN_NAME = 'gulp-ttf2woff';
+
 // File level transform function
 function ttf2woffTransform(opt) {
   // Return a callback function handling the buffered content
@@ -11,7 +13,7 @@ function ttf2woffTransform(opt) {
 
     // Handle any error
     if(err) {
-      cb(new gutil.PluginError('ttf2woff', err, {showStack: true}));
+      cb(new gutil.PluginError(PLUGIN_NAME, err, {showStack: true}));
     }
 
     // Use the buffered content
@@ -19,7 +21,7 @@ function ttf2woffTransform(opt) {
         buf = new Buffer(ttf2woff(new Uint8Array(buf)).buffer);
         cb(null, buf);
       } catch(err) {
-        cb(new gutil.PluginError('ttf2woff', err, {showStack: true}));
+        cb(new gutil.PluginError(PLUGIN_NAME, err, {showStack: true}));
       }
 
   };
@@ -42,7 +44,7 @@ function ttf2woffGulp() {
           new Uint8Array(file.contents)
         ).buffer);
       } catch(err) {
-        stream.emit('error', new gutil.PluginError('ttf2woff', err, {
+        stream.emit('error', new gutil.PluginError(PLUGIN_NAME, err, {
           showStack: true
         }));
       }
