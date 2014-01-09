@@ -21,6 +21,16 @@ gulp.task('ttf2woff', function(){
 });
 ```
 
+## API
+
+### ttf2woff(options)
+
+#### options.ignoreExt
+Type: `Boolean`
+Default value: `false`
+
+Set to true to also convert files that doesn't have the .ttf extension.
+
 ### Contributing / Issues
 
 Please submit TTF to WOFF related issues to the

@@ -2,6 +2,7 @@ var PassThrough = require('stream').PassThrough
   , gutil = require('gulp-util')
   , BufferStreams = require('bufferstreams')
   , ttf2woff = require('ttf2woff')
+  , path = require('path')
 ;
 
 const PLUGIN_NAME = 'gulp-ttf2woff';
@@ -28,12 +29,16 @@ function ttf2woffTransform(opt) {
 }
 
 // Plugin function
-function ttf2woffGulp() {
+function ttf2woffGulp(options) {
+
+  options = options || {};
+  options.ignoreExt = options.ignoreExt || false;
 
   var stream = new PassThrough({objectMode: true});
 
   stream.on('data', function(file) {
-    if(file.isNull()) return;
+    if(file.isNull()) return; // Do nothing
+    if((!options.ignoreExt) && '.ttf' !== path.extname(file.path)) return;
 
     file.path = gutil.replaceExtension(file.path, ".woff");
 

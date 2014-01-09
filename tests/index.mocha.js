@@ -5,6 +5,8 @@ var gulp = require('gulp')
   , es = require('event-stream')
   , fs = require('fs')
   , ttf2woff = require(__dirname + '/../src/index.js')
+  , Stream = require('stream')
+  , gutil = require('gulp-util')
 ;
 
 // Erasing date to get an invariant created and modified font date
@@ -21,9 +23,11 @@ describe('gulp-ttf2woff conversion', function() {
   var filename = __dirname + '/fixtures/iconsfont';
   var woff = fs.readFileSync(filename + '.woff');
 
-  it('should work in buffer mode', function(done) {
+  describe('in buffer mode', function() {
 
-      gulp.src(filename + '.ttf')
+  it('should work', function(done) {
+
+      gulp.src(filename + '.ttf', {buffer: true})
         .pipe(ttf2woff())
         // Uncomment to regenerate the test files if changes in the ttf2woff lib
         // .pipe(gulp.dest(__dirname + '/fixtures/'))
@@ -34,22 +38,62 @@ describe('gulp-ttf2woff conversion', function() {
             done();
         }));
 
+    });
+
+    it('should let non-ttf files pass through', function(done) {
+
+        var s = ttf2woff();
+        s.pipe(es.through(function(file) {
+            assert.equal(file.path,'bibabelula.foo');
+            assert.equal(file.contents.toString('utf-8'), 'ohyeah');
+          }, function() {
+              done();
+          }));
+        s.write(new gutil.File({
+          path: 'bibabelula.foo',
+          contents: new Buffer('ohyeah')
+        }));
+        s.end();
+
+    });
+
   });
 
-  it('should work in stream mode', function(done) {
 
-      gulp.src(filename + '.ttf', {buffer: false})
-        .pipe(ttf2woff())
-        .pipe(es.through(function(file) {
-          // Get the buffer to compare results
-          file.contents.pipe(es.wait(function(err, data) {
-            assert.equal(data.length, woff.toString('utf-8').length);
-            assert.equal(data, woff.toString('utf-8'));
+  describe('in stream mode', function() {
+
+    it('should work', function(done) {
+
+        gulp.src(filename + '.ttf', {buffer: false})
+          .pipe(ttf2woff())
+          .pipe(es.through(function(file) {
+            // Get the buffer to compare results
+            file.contents.pipe(es.wait(function(err, data) {
+              assert.equal(data.length, woff.toString('utf-8').length);
+              assert.equal(data, woff.toString('utf-8'));
+            }));
+          }, function() {
+              done();
           }));
-        }, function() {
-            done();
-        }));
 
+    });
+
+    it('should let non-ttf files pass through', function(done) {
+
+        var s = ttf2woff();
+        s.pipe(es.through(function(file) {
+            assert.equal(file.path,'bibabelula.foo', {buffer: false});
+            assert(file.contents instanceof Stream.PassThrough);
+          }, function() {
+              done();
+          }));
+        s.write(new gutil.File({
+          path: 'bibabelula.foo',
+          contents: new Stream.PassThrough()
+        }));
+        s.end();
+
+    });
   });
 
 });
