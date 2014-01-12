@@ -1,7 +1,7 @@
 {
   "name": "gulp-ttf2woff",
   "description": "Create a WOFF font from a TTF font",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/nfroidure/gulp-ttf2woff",
   "author": {
     "name": "Nicolas Froidure",
