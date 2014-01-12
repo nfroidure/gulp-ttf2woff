@@ -33,12 +33,26 @@ function ttf2woffGulp(options) {
 
   options = options || {};
   options.ignoreExt = options.ignoreExt || false;
+  options.clone = options.clone || false;
 
   var stream = new Stream.Transform({objectMode: true});
 
   stream._transform = function(file, unused, done) {
-    if(file.isNull()) return done(); // Do nothing
-    if((!options.ignoreExt) && '.ttf' !== path.extname(file.path)) return done();
+     // When null just pass through
+    if(file.isNull()) {
+      stream.push(file); done();
+      return;
+    }
+
+    // If the ext doesn't match, pass it through
+    if((!options.ignoreExt) && '.ttf' !== path.extname(file.path)) {
+      stream.push(file); done();
+      return;
+    }
+
+    if(options.clone) {
+      stream.push(file.clone());
+    }
 
     file.path = gutil.replaceExtension(file.path, ".woff");
 
