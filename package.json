@@ -30,7 +30,8 @@
   "dependencies": {
     "ttf2woff": "latest",
     "gulp-util": "~2.2.5",
-    "bufferstreams": "0.0.1"
+    "bufferstreams": "0.0.1",
+    "readable-stream": "^1.0.26-2"
   },
   "keywords": [
     "gulpplugin",
