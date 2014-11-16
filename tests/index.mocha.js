@@ -122,7 +122,7 @@ describe('gulp-ttf2woff conversion', function() {
         .pipe(es.through(function(file) {
           // Get the buffer to compare results
           file.contents.pipe(es.wait(function(err, data) {
-            assert.equal(data.length, woff.toString('utf-8').length);
+            assert.equal(data.length, woff.length);
             assert.equal(data, woff.toString('utf-8'));
           }));
           n++;
@@ -141,7 +141,7 @@ describe('gulp-ttf2woff conversion', function() {
           .pipe(es.through(function(file) {
             if(file.path === filename + '.woff') {
               file.contents.pipe(es.wait(function(err, data) {
-                assert.equal(data.length, woff.toString('utf-8').length);
+                assert.equal(data.length, woff.length);
                 assert.equal(data, woff.toString('utf-8'));
               }));
             } else {
