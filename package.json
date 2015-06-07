@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "ttf2woff": "latest",
-    "gulp-util": "~3.0.3",
+    "gulp-util": "~3.0.5",
     "bufferstreams": "1.0.1",
     "readable-stream": "^1.0.33"
   },
@@ -43,8 +43,8 @@
     "converter"
   ],
   "devDependencies": {
-    "gulp": "~3.8.11",
-    "mocha": "~2.1.0",
-    "streamtest": "^1.1.1"
+    "gulp": "~3.9.0",
+    "mocha": "~2.2.5",
+    "streamtest": "^1.2.0"
   }
 }
