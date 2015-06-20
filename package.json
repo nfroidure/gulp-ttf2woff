@@ -25,7 +25,9 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "mocha tests/*.mocha.js"
+    "test": "mocha tests/*.mocha.js",
+    "coveralls": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- tests/*.mocha.js -R spec -t 5000 && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "cover": "./node_modules/istanbul/lib/cli.js cover --report html ./node_modules/mocha/bin/_mocha -- tests/*.mocha.js -R spec -t 5000"
   },
   "dependencies": {
     "ttf2woff": "latest",
@@ -43,8 +45,11 @@
     "converter"
   ],
   "devDependencies": {
+    "coveralls": "~2.11.2",
     "gulp": "~3.9.0",
+    "istanbul": "~0.3.14",
     "mocha": "~2.2.5",
+    "mocha-lcov-reporter": "0.0.2",
     "streamtest": "^1.2.0"
   }
 }
