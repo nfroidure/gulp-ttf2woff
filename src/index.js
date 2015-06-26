@@ -1,10 +1,12 @@
+'use strict';
+
 var path = require('path');
 var Stream = require('readable-stream');
 var gutil = require('gulp-util');
 var BufferStreams = require('bufferstreams');
 var ttf2woff = require('ttf2woff');
 
-const PLUGIN_NAME = 'gulp-ttf2woff';
+var PLUGIN_NAME = 'gulp-ttf2woff';
 
 // File level transform function
 function ttf2woffTransform(opt) {
@@ -20,8 +22,8 @@ function ttf2woffTransform(opt) {
       try {
         buf = new Buffer(ttf2woff(new Uint8Array(buf)).buffer);
         cb(null, buf);
-      } catch(err) {
-        cb(new gutil.PluginError(PLUGIN_NAME, err, {showStack: true}));
+      } catch(err2) {
+        cb(new gutil.PluginError(PLUGIN_NAME, err2, {showStack: true}));
       }
 
   };
@@ -90,7 +92,7 @@ function ttf2woffGulp(options) {
 
   return stream;
 
-};
+}
 
 // Export the file level transform function for other plugins usage
 ttf2woffGulp.fileTransform = ttf2woffTransform;

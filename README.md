@@ -1,7 +1,7 @@
 # gulp-ttf2woff
-> Create a WOFF font from a TTF font with [Gulp](http://gulpjs.com/).
+> Create a WOFF font from a TTF one with [Gulp](http://gulpjs.com/).
 
-[![NPM version](https://badge.fury.io/js/gulp-ttf2woff.png)](https://npmjs.org/package/gulp-ttf2woff) [![Build status](https://secure.travis-ci.org/nfroidure/gulp-ttf2woff.png)](https://travis-ci.org/nfroidure/gulp-ttf2woff) [![Dependency Status](https://david-dm.org/nfroidure/gulp-ttf2woff.png)](https://david-dm.org/nfroidure/gulp-ttf2woff) [![devDependency Status](https://david-dm.org/nfroidure/gulp-ttf2woff/dev-status.png)](https://david-dm.org/nfroidure/gulp-ttf2woff#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/nfroidure/gulp-ttf2woff/badge.png?branch=master)](https://coveralls.io/r/nfroidure/gulp-ttf2woff?branch=master) [![Code Climate](https://codeclimate.com/github/nfroidure/gulp-ttf2woff.png)](https://codeclimate.com/github/nfroidure/gulp-ttf2woff)
+[![NPM version](https://badge.fury.io/js/gulp-ttf2woff.svg)](https://npmjs.org/package/gulp-ttf2woff) [![Build status](https://secure.travis-ci.org/nfroidure/gulp-ttf2woff.svg)](https://travis-ci.org/nfroidure/gulp-ttf2woff) [![Dependency Status](https://david-dm.org/nfroidure/gulp-ttf2woff.svg)](https://david-dm.org/nfroidure/gulp-ttf2woff) [![devDependency Status](https://david-dm.org/nfroidure/gulp-ttf2woff/dev-status.svg)](https://david-dm.org/nfroidure/gulp-ttf2woff#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/nfroidure/gulp-ttf2woff/badge.svg?branch=master)](https://coveralls.io/r/nfroidure/gulp-ttf2woff?branch=master) [![Code Climate](https://codeclimate.com/github/nfroidure/gulp-ttf2woff.svg)](https://codeclimate.com/github/nfroidure/gulp-ttf2woff)
 
 ## Usage
 

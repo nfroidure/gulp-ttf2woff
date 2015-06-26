@@ -10,16 +10,6 @@ var StreamTest = require('streamtest');
 
 var ttf2woff = require(__dirname + '/../src/index.js');
 
-// Erasing date to get an invariant created and modified font date
-// See: https://github.com/fontello/ttf2woff/blob/c6de4bd45d50afc6217e150dbc69f1cd3280f8fe/lib/sfnt.js#L19
-Date = (function(d) {
-  function Date() {
-    d.call(this, 3600);
-  }
-  Date.now = d.now;
-  return Date;
-})(Date);
-
 describe('gulp-ttf2woff conversion', function() {
   var filename = __dirname + '/fixtures/iconsfont';
   var woff = fs.readFileSync(filename + '.woff');
@@ -32,7 +22,7 @@ describe('gulp-ttf2woff conversion', function() {
       describe('with null contents', function() {
 
         it('should let null files pass through', function(done) {
-            
+
             StreamTest[version].fromObjects([new gutil.File({
               path: 'bibabelula.foo',
               contents: null
@@ -91,7 +81,7 @@ describe('gulp-ttf2woff conversion', function() {
         });
 
         it('should let non-ttf files pass through', function(done) {
-            
+
             StreamTest[version].fromObjects([new gutil.File({
               path: 'bibabelula.foo',
               contents: new Buffer('ohyeah')
@@ -150,7 +140,7 @@ describe('gulp-ttf2woff conversion', function() {
         });
 
         it('should let non-ttf files pass through', function(done) {
-            
+
           StreamTest[version].fromObjects([new gutil.File({
             path: 'bibabelula.foo',
             contents: new Stream.PassThrough()
