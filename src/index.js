@@ -2,8 +2,9 @@
 
 var path = require('path');
 var Stream = require('readable-stream');
-var gutil = require('gulp-util');
+var PluginError = require('plugin-error');
 var BufferStreams = require('bufferstreams');
+var replaceExtension = require('replace-ext');
 var ttf2woff = require('ttf2woff');
 
 var PLUGIN_NAME = 'gulp-ttf2woff';
@@ -15,7 +16,7 @@ function ttf2woffTransform(opt) {
 
     // Handle any error
     if(err) {
-      cb(new gutil.PluginError(PLUGIN_NAME, err, {showStack: true}));
+      cb(new PluginError(PLUGIN_NAME, err, {showStack: true}));
     }
 
     // Use the buffered content
@@ -23,7 +24,7 @@ function ttf2woffTransform(opt) {
         buf = new Buffer(ttf2woff(new Uint8Array(buf)).buffer);
         cb(null, buf);
       } catch(err2) {
-        cb(new gutil.PluginError(PLUGIN_NAME, err2, {showStack: true}));
+        cb(new PluginError(PLUGIN_NAME, err2, {showStack: true}));
       }
 
   };
@@ -66,7 +67,7 @@ function ttf2woffGulp(options) {
       }
     }
 
-    file.path = gutil.replaceExtension(file.path, ".woff");
+    file.path = replaceExtension(file.path, ".woff");
 
     // Buffers
     if(file.isBuffer()) {
@@ -75,7 +76,7 @@ function ttf2woffGulp(options) {
           new Uint8Array(file.contents)
         ).buffer);
       } catch(err) {
-        stream.emit('error', new gutil.PluginError(PLUGIN_NAME, err, {
+        stream.emit('error', new PluginError(PLUGIN_NAME, err, {
           showStack: true
         }));
       }
