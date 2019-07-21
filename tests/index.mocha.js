@@ -85,7 +85,7 @@ describe('gulp-ttf2woff conversion', function() {
 
             StreamTest[version].fromObjects([new Vinyl({
               path: 'bibabelula.foo',
-              contents: new Buffer('ohyeah')
+              contents: Buffer.from('ohyeah')
             })])
             .pipe(ttf2woff())
             .pipe(StreamTest[version].toObjects(function(err, objs) {

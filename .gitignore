@@ -2,5 +2,6 @@
 *.swp
 node_modules/
 test/results
+.nyc_output
 .git
 .coveralls.yml
