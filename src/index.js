@@ -21,7 +21,7 @@ function ttf2woffTransform(opt) {
 
     // Use the buffered content
       try {
-        buf = new Buffer(ttf2woff(new Uint8Array(buf)).buffer);
+        buf = Buffer.from(ttf2woff(new Uint8Array(buf)).buffer);
         cb(null, buf);
       } catch(err2) {
         cb(new PluginError(PLUGIN_NAME, err2, {showStack: true}));
@@ -72,7 +72,7 @@ function ttf2woffGulp(options) {
     // Buffers
     if(file.isBuffer()) {
       try {
-        file.contents = new Buffer(ttf2woff(
+        file.contents = Buffer.from(ttf2woff(
           new Uint8Array(file.contents)
         ).buffer);
       } catch(err) {
